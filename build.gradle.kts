@@ -25,6 +25,7 @@ repositories {
 
 dependencies {
   implementation("io.ktor:ktor-server-core-jvm")
+  implementation("io.ktor:ktor-server-resources")
   implementation("io.ktor:ktor-server-auth-jvm")
   implementation("io.ktor:ktor-server-sessions-jvm")
   implementation("io.ktor:ktor-server-host-common-jvm")
