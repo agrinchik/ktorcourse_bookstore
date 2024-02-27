@@ -1,1 +1,1 @@
-curl -s "http://localhost:8080/book/list?sortby=title&asc=true"
+curl -s -u "shopper1:password" "http://localhost:8080/api/book/list?sortby=title&asc=true"

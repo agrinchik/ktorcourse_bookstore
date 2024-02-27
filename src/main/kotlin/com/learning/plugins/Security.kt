@@ -7,6 +7,20 @@ import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 
 fun Application.configureSecurity() {
+  val users = listOf<String>("shopper1", "shopper2", "shopper3")
+  val admins = listOf<String>("admin")
+  install(Authentication) {
+    basic("bookStoreAuth") {
+      realm = "Book store"
+      validate {
+        if ((users.contains(it.name) || admins.contains(it.name)) && it.password == "password")
+          UserIdPrincipal(it.name)
+        else
+          null
+      }
+    }
+  }
+
   authentication {
     basic(name = "myauth1") {
       realm = "Ktor Server"
@@ -34,14 +48,8 @@ fun Application.configureSecurity() {
     }
   }
   routing {
-    authenticate("myauth1") {
-      get("/protected/route/basic") {
-        val principal = call.principal<UserIdPrincipal>()!!
-        call.respondText("Hello ${principal.name}")
-      }
-    }
-    authenticate("myauth2") {
-      get("/protected/route/form") {
+    authenticate("bookStoreAuth") {
+      get("/api/tryauth") {
         val principal = call.principal<UserIdPrincipal>()!!
         call.respondText("Hello ${principal.name}")
       }
