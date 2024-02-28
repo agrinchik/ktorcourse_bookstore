@@ -45,6 +45,7 @@ dependencies {
   implementation("io.ktor:ktor-client-serialization:$ktor_version")
   implementation("io.ktor:ktor-serialization-gson:$ktor_version")
   implementation("ch.qos.logback:logback-classic:$logback_version")
+  implementation("org.mongodb:mongodb-driver:3.12.9")
   testImplementation("io.ktor:ktor-server-tests-jvm")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
