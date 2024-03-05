@@ -18,7 +18,8 @@ import kotlinx.html.h2
 import kotlinx.html.input
 import kotlinx.html.p
 
-class LoginTemplate(val basicTemplate: GeneralViewTemplate = GeneralViewTemplate()) : Template<HTML> {
+class LoginTemplate(val session: Session?) : Template<HTML> {
+  val basicTemplate: GeneralViewTemplate = GeneralViewTemplate(session)
   val greeting = Placeholder<FlowContent>()
   override fun HTML.apply() {
     insert(basicTemplate) {

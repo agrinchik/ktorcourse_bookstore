@@ -5,6 +5,8 @@ import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoCollection
 import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.Filters.eq
+import com.mongodb.client.model.Filters.or
+import com.mongodb.client.model.Filters.regex
 import org.bson.Document
 import org.bson.codecs.configuration.CodecRegistries.fromProviders
 import org.bson.codecs.configuration.CodecRegistries.fromRegistries
@@ -13,7 +15,8 @@ import org.bson.codecs.pojo.PojoCodecProvider
 import org.bson.types.ObjectId
 import org.slf4j.LoggerFactory
 
-class DataManagerMongoDB {
+enum class DataManagerMongoDB {
+  INSTANCE;
   val log = LoggerFactory.getLogger(DataManagerMongoDB::class.java)
   val database: MongoDatabase
   val bookCollection: MongoCollection<Book>
@@ -77,6 +80,18 @@ class DataManagerMongoDB {
       .sort(Document(mapOf(Pair(sortBy, ascInt), Pair("_id", -1))))
       .skip(pageno - 1)
       .limit(pageSize)
+      .toList()
+  }
+
+  fun searchBooks(str: String): List<Book> {
+    return bookCollection
+      .find(
+        or(
+          regex("title", ".*$str.*"),
+          regex("author", ".*$str.*")
+        )
+      )
+      .sort(Document(mapOf(Pair("title", 1), Pair("_id", -1))))
       .toList()
   }
 }

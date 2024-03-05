@@ -1,22 +1,13 @@
 package com.ui
 
-
+import com.ui.login.Session
 import io.ktor.server.html.Placeholder
 import io.ktor.server.html.Template
-import io.ktor.server.html.TemplatePlaceholder
 import io.ktor.server.html.insert
-import kotlinx.html.HTML
-import kotlinx.html.HtmlBlockTag
-import kotlinx.html.body
-import kotlinx.html.div
-import kotlinx.html.head
-import kotlinx.html.link
-import kotlinx.html.script
-import kotlinx.html.title
+import kotlinx.html.*
 
-class GeneralViewTemplate() : Template<HTML> {
+class GeneralViewTemplate(val session: Session?) : Template<HTML> {
   val content = Placeholder<HtmlBlockTag>()
-  val menu = TemplatePlaceholder<NavigationTemplate>()
 
   override fun HTML.apply() {
     head {
@@ -32,11 +23,37 @@ class GeneralViewTemplate() : Template<HTML> {
     }
 
     body {
-      insert(NavigationTemplate(), menu)
+      insert(NavigationTemplate(session)){
+        menuitems {
+          a(classes = "nav-link", href = Endpoints.HOME.url) {
+            +"Home"
+          }
+        }
+        if (session == null) {
+
+          menuitems {
+            a(classes = "nav-link", href = Endpoints.LOGIN.url) {
+              +"Login"
+            }
+          }
+        }
+        else{
+          menuitems {
+            a(classes = "nav-link", href = Endpoints.LOGOUT.url) {
+              +"Logout"
+            }
+          }
+          menuitems {
+            a(classes = "nav-link", href = Endpoints.BOOKS.url) {
+              +"Books"
+            }
+          }
+        }
+      }
 
       div(classes = "container") {
         div(classes = "row") {
-          div(classes = "col-md-6 offset-md-3") {
+          div(classes = "col-md-12") {
             insert(content)
           }
         }

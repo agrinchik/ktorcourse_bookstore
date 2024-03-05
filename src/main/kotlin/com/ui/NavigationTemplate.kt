@@ -1,5 +1,6 @@
 package com.ui
 
+import com.ui.login.Session
 import io.ktor.server.html.PlaceholderList
 import io.ktor.server.html.Template
 import io.ktor.server.html.each
@@ -16,7 +17,7 @@ import kotlinx.html.nav
 import kotlinx.html.span
 import kotlinx.html.ul
 
-class NavigationTemplate() : Template<FlowContent> {
+class NavigationTemplate(val session: Session?) : Template<FlowContent> {
   val menuitems = PlaceholderList<UL, FlowContent>()
 
   override fun FlowContent.apply() {
