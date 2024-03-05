@@ -1,6 +1,6 @@
 package com.ui.books
 
-import com.learning.Book
+import com.model.Book
 import com.ui.Endpoints
 import com.ui.GeneralViewTemplate
 import com.ui.login.Session
@@ -82,9 +82,18 @@ class BookTemplate(val session: Session?, val books: List<Book>) : Template<HTML
                   td { +"${it.author}" }
                   td { +"${it.price}" }
                   td {
+                    form(
+                      method = FormMethod.post,
+                      encType = FormEncType.multipartFormData,
+                      action = Endpoints.DOADDTOCART.url
+                    ) {
                       button(classes = "btn btn-success", type = ButtonType.submit) {
                         +"Add to cart"
                       }
+                      input(type = InputType.hidden, name = "bookid") {
+                        value="${it.id}"
+                      }
+                    }
                   }
                 }
               }

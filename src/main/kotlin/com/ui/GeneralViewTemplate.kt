@@ -4,7 +4,15 @@ import com.ui.login.Session
 import io.ktor.server.html.Placeholder
 import io.ktor.server.html.Template
 import io.ktor.server.html.insert
-import kotlinx.html.*
+import kotlinx.html.HTML
+import kotlinx.html.HtmlBlockTag
+import kotlinx.html.a
+import kotlinx.html.body
+import kotlinx.html.div
+import kotlinx.html.head
+import kotlinx.html.link
+import kotlinx.html.script
+import kotlinx.html.title
 
 class GeneralViewTemplate(val session: Session?) : Template<HTML> {
   val content = Placeholder<HtmlBlockTag>()

@@ -1,7 +1,7 @@
 package com.ui.login
 
 import com.learning.Constants
-import com.learning.DataManagerMongoDB
+import com.model.DataManagerMongoDB
 import com.learning.SecurityHandler
 import com.ui.Endpoints
 import com.ui.books.BookTemplate

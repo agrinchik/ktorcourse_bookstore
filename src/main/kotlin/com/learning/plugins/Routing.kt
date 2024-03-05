@@ -1,6 +1,7 @@
 package com.learning.plugins
 
 import com.ui.books.books
+import com.ui.cart.cart
 import com.ui.login.loginView
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
@@ -26,6 +27,7 @@ fun Application.configureRouting() {
   routing {
     books()
     loginView()
+    cart()
 
     get("/") {
       call.respondText("Hello World!")
