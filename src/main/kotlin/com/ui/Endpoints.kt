@@ -10,5 +10,5 @@ enum class Endpoints(val url: String) {
   DOADDTOCART("/html/cart/add"),
   DOREMOVEFROMCART("/html/cart/remove"),
   CART("/html/cart"),
-  CHECKOUT("/html/checkout");
+  RECEIPT("/html/checkout");
 }
